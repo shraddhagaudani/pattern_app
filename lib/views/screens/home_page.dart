@@ -57,7 +57,32 @@ class _HomepageState extends State<Homepage> {
             Expanded(
               flex: 10,
               child: Column(
-                children: [],
+                children: [
+                  for (int i = 1;
+                      i <=
+                          sliderController.sliderModel.initialsliderval.toInt();
+                      i++)
+                    Row(
+                      children: [
+                        for (int j = 1; j <= i; j++)
+                          (navigationBarController
+                                      .navigationBarModel.initialval ==
+                                  0)
+                              ? Text(
+                                  "$j",
+                                  style: GoogleFonts.lato(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                )
+                              : Text(
+                                  "* ",
+                                  style: GoogleFonts.lato(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                )
+                      ],
+                    )
+                ],
               ),
             ),
             Expanded(
@@ -84,27 +109,28 @@ class _HomepageState extends State<Homepage> {
       bottomNavigationBar: GetBuilder<NavigationBarController>(
         builder: (_) {
           return NavigationBar(
-              selectedIndex:
-                  navigationBarController.navigationBarModel.initialval,
-              onDestinationSelected: (val) {
-                setState(() {
-                  navigationBarController.navigationBarModel.initialval = val;
-                });
-              },
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.onetwothree,
-                  ),
-                  label: "Number",
+            selectedIndex:
+                navigationBarController.navigationBarModel.initialval,
+            onDestinationSelected: (val) {
+              setState(() {
+                navigationBarController.navigationBarModel.initialval = val;
+              });
+            },
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(
+                  Icons.onetwothree,
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.star,
-                  ),
-                  label: "Star",
+                label: "Number",
+              ),
+              NavigationDestination(
+                icon: Icon(
+                  Icons.star,
                 ),
-              ]);
+                label: "Star",
+              ),
+            ],
+          );
         },
       ),
     );
